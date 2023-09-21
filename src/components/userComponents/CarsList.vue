@@ -1,41 +1,45 @@
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <div
-      v-for="car in cars.value"
-      :key="car.id"
-      class="bg-white rounded-lg p-4 shadow-md"
-    >
-      <p class="text-xl font-semibold">{{ car.name }}</p>
-      <p class="text-gray-600">{{ car.model }}</p>
-      <p class="text-gray-600">{{ car.color }}</p>
-      <p class="text-gray-600">{{ car.booking }}</p>
-      <div v-if="car.booking !== 'booked'">
-        <select name="days" id="" v-model="car.selectedBookingDays">
-          <option v-for="(item, index) in options" :key="index">
-            {{ item }}
-          </option>
-        </select>
+  <div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div
+        v-for="car in cars.value"
+        :key="car.id"
+        class="bg-white rounded-lg p-4 shadow-md"
+      >
+        <p class="text-xl font-semibold">{{ car.name }}</p>
+        <p class="text-gray-600">{{ car.model }}</p>
+        <p class="text-gray-600">{{ car.color }}</p>
+        <p class="text-gray-600">{{ car.booking }}</p>
+        <div v-if="car.booking !== 'booked'">
+          <select name="days" id="" v-model="car.selectedBookingDays">
+            <option v-for="(item, index) in options" :key="index">
+              {{ item }}
+            </option>
+          </select>
+          <button
+            @click="reserveCar(car)"
+            class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
+          >
+            Reserve Car
+          </button>
+        </div>
         <button
-          @click="reserveCar(car)"
-          class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
+          v-else
+          class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md disabled"
+          disabled
         >
-          Reserve Car
+          Car Booked
         </button>
       </div>
-      <button
-        v-else
-        class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md disabled"
-        disabled
-      >
-        Car Booked
-      </button>
     </div>
 
-    <router-link
-      to="/reservation"
-      class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
-      >View Reservations</router-link
-    >
+    <div>
+      <router-link
+        to="/reservation"
+        class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
+        >View Reservations</router-link
+      >
+    </div>
   </div>
 </template>
 

@@ -8,6 +8,7 @@ import CreateUserView from '../views/managerViews/CreateUserView.vue'
 import ReadAndDeleteUsersView from '../views/managerViews/ReadAndDeleteUsersView.vue'
 import RUDCarsView from '../views/managerViews/RUDCarsView.vue'
 import CreateCarView from '../views/managerViews/CreateCarView.vue'
+import CarReservationView from '../views/managerViews/CarReservationView.vue'
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     path: '/manager/createCar',
     name: 'createCar',
     component: CreateCarView
+  },
+        {
+    path: '/manager/reservations',
+    name: 'reservations',
+    component: CarReservationView
   },
  
 ]

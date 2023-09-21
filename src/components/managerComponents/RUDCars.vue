@@ -120,7 +120,7 @@ const formData = ref({
 const carId = ref(null);
 
 onMounted(async () => {
-  await store.dispatch("cars/fetchCars");
+  await store.dispatch("cars/fetchCarsById");
 });
 const openUpdateModal = (car) => {
   console.log(car);

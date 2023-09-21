@@ -26,8 +26,9 @@ export default {
         commit("SET_CARS", data?.data?.cars)   
         
       },
-        async fetchCarsById({ commit },id) {
-        const token = localStorage.getItem("token");
+        async fetchCarsById({ commit }) {
+          const token = localStorage.getItem("token");
+          const id=localStorage.getItem("userId")
         console.log('token in the fetch----> ', token)
         const config = {
           headers: {
