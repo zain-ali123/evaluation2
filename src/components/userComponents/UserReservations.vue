@@ -6,7 +6,6 @@
     >
       <div v-for="(reservation, index) in reservations.value" :key="index">
         <div class="bg-white rounded-lg shadow-md p-4">
-          <p>{{ reservation.carId }}</p>
           <h2 class="text-xl font-semibold mb-2">
             {{ reservation.carId.name }}
           </h2>
@@ -17,7 +16,7 @@
           </p>
           <p class="text-gray-600">Days: {{ reservation.days }}</p>
           <button
-            class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
+            class="bg-red-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-red-600"
             @click="cancelReservation(reservation)"
           >
             Cancel
@@ -44,12 +43,17 @@ reservations.value = computed(
 
 const cancelReservation = async (reservation) => {
   //   console.log(reservation.carId._id);
-  const obj = {
-    carId: reservation.carId._id,
-    userId: localStorage.getItem("userId"),
-  };
-  console.log(obj);
-  await store.dispatch("reservation/cancelResevation", obj);
-  await store.dispatch("reservation/getReservationsByUserId");
+  const answer = confirm("Are you sure you want to concel reservation");
+  if (answer) {
+    {
+      const obj = {
+        carId: reservation.carId._id,
+        userId: localStorage.getItem("userId"),
+      };
+      console.log(obj);
+      await store.dispatch("reservation/cancelResevation", obj);
+      await store.dispatch("reservation/getReservationsByUserId");
+    }
+  }
 };
 </script>

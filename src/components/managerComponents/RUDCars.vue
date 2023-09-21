@@ -12,7 +12,7 @@
         <p class="text-gray-600">{{ car.price }}</p>
         <div class="flex justify-between">
           <button
-            @click="openUpdateModal(car)"
+            @click="openUpdatePopup(car)"
             class="text-blue-500 bg-white mt-2 rounded-md hover:text-blue-800 hover:px-4 hover:py-2 hover:bg-blue-100"
           >
             Update Car
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div
-        v-if="isUpdateModalOpen"
+        v-if="isUpdatePopupOpen"
         class="fixed inset-0 flex items-center justify-center z-50 bg-opacity-50 bg-gray-900"
       >
         <div class="bg-white w-1/2 p-4 rounded-lg shadow-lg">
@@ -106,7 +106,7 @@ import { useStore } from "vuex";
 import { computed, onMounted, ref } from "vue";
 const store = useStore();
 const cars = ref([]);
-const isUpdateModalOpen = ref(false);
+const isUpdatePopupOpen = ref(false);
 cars.value = computed(() => store.getters["cars/getCars"]);
 const formData = ref({
   name: null,
@@ -119,7 +119,7 @@ const carId = ref(null);
 onMounted(async () => {
   await store.dispatch("cars/fetchCarsById");
 });
-const openUpdateModal = (car) => {
+const openUpdatePopup = (car) => {
   console.log(car);
   formData.value.name = car?.name;
   formData.value.model = car?.model;
@@ -128,11 +128,11 @@ const openUpdateModal = (car) => {
 
   carId.value = car.id;
 
-  isUpdateModalOpen.value = true;
+  isUpdatePopupOpen.value = true;
 };
 
 const closeUpdateModal = () => {
-  isUpdateModalOpen.value = false;
+  isUpdatePopupOpen.value = false;
 };
 
 const updateCar = async () => {
@@ -143,7 +143,7 @@ const updateCar = async () => {
   };
   await store.dispatch("cars/updateCarById", obj);
 
-  isUpdateModalOpen.value = false;
+  isUpdatePopupOpen.value = false;
 };
 const deleteCar = async (id) => {
   console.log(id);

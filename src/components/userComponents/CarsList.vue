@@ -1,8 +1,16 @@
 <template>
   <div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="py-5">
+      <input
+        v-model="searchQuery"
+        type="text"
+        placeholder="Search..."
+        class="border border-gray-300 p-2 rounded-md"
+      />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 text-left">
       <div
-        v-for="car in cars.value"
+        v-for="car in filteredData.value"
         :key="car.id"
         class="bg-white rounded-lg p-4 shadow-md"
       >
@@ -11,11 +19,22 @@
         <p class="text-gray-600">{{ car.color }}</p>
         <p class="text-gray-600">{{ car.booking }}</p>
         <div v-if="car.booking !== 'booked'">
-          <select name="days" id="" v-model="car.selectedBookingDays">
+          <!-- <select name="days" id="" v-model="car.selectedBookingDays">
             <option v-for="(item, index) in options" :key="index">
               {{ item }}
             </option>
-          </select>
+          </select> -->
+          <div class="grid gap-2">
+            <p class="pt-3">Enter Number Of Days</p>
+            <input
+              v-model="car.selectedBookingDays"
+              type="number"
+              id="days"
+              name="days"
+              class="px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-400"
+              required
+            />
+          </div>
           <button
             @click="reserveCar(car)"
             class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
@@ -25,20 +44,12 @@
         </div>
         <button
           v-else
-          class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md disabled"
+          class="bg-gray-400 text-white px-4 py-2 mt-2 rounded-md disabled"
           disabled
         >
           Car Booked
         </button>
       </div>
-    </div>
-
-    <div>
-      <router-link
-        to="/reservation"
-        class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
-        >View Reservations</router-link
-      >
     </div>
   </div>
 </template>
@@ -48,30 +59,42 @@ import { useStore } from "vuex";
 import { computed, onMounted, ref } from "vue";
 const store = useStore();
 const cars = ref([]);
-const options = ref([1, 2, 3, 4, 5, 6, 7]);
+const searchQuery = ref("");
+
 cars.value = computed(() => store.getters["cars/getCars"]);
 
 onMounted(async () => {
   await store.dispatch("cars/fetchCars");
 });
-
 const reserveCar = async (car) => {
   if (car.selectedBookingDays == undefined) {
-    alert("Please select no of days");
+    alert("Please select the number of days");
   } else {
     console.log(
       `Reserved car: ${car.name} for ${car.selectedBookingDays} days`
     );
-    // console.log(store.state);
-    // console.log(localStorage.getItem("userId"));
     const obj = {
       carId: car.id,
       userId: localStorage.getItem("userId"),
       days: parseInt(car.selectedBookingDays),
     };
-    // console.log(obj);
     await store.dispatch("reservation/reserveCar", obj);
     await store.dispatch("cars/fetchCars");
   }
 };
+
+const filteredData = computed(() => {
+  console.log(cars.value.value);
+  const query = searchQuery.value.toLowerCase().trim();
+  console.log(query);
+  if (!query) return cars.value;
+
+  return cars.value.value.filter(
+    (item) =>
+      item.name.toLowerCase().includes(query) ||
+      item.color.toLowerCase().includes(query)
+    // ||
+    // item.model.includes(query) ||
+  );
+});
 </script>

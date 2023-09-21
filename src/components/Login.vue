@@ -4,7 +4,7 @@
     @submit.prevent="authenticateUser"
   >
     <form
-      class="text-metal bg-silver rounded-xl w-80 sm:w-96 text-center sm:h-80"
+      class="text-metal bg-white rounded-xl w-80 sm:w-96 text-center sm:h-80"
     >
       <div class="flex justify-center mb-8">
         <h2 class="text-2xl">Login</h2>
@@ -22,7 +22,7 @@
           type="email"
           id="email"
           name="email"
-          class="w-full px-4 py-2 rounded-md focus:outline-none"
+          class="w-full px-4 py-2 rounded-md"
           placeholder="example@example.com"
         />
       </div>
@@ -38,7 +38,7 @@
           type="password"
           id="password"
           name="password"
-          class="w-full px-4 py-2 rounded-md focus:outline-none"
+          class="w-full px-4 py-2 rounded-md"
           placeholder="Password"
         />
       </div>

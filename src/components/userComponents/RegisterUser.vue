@@ -1,6 +1,9 @@
 <template>
-  <div class="h-screen flex py-12 justify-center bg-mygrey">
-    <form class="bg-mygrey w-80 h-4/5" @submit.prevent="registerUser">
+  <div class="h-screen flex py-12 justify-center">
+    <form
+      class="bg-mygrey w-1/4 h-96 border-2 rounded-lg bg-white"
+      @submit.prevent="registerUser"
+    >
       <h2 class="text-2xl mb-4">User Registration</h2>
       <div class="mb-4">
         <label for="name" class="block font-semibold">Name</label>
@@ -59,13 +62,12 @@
         </button>
       </div>
 
-      <!-- <router-link
+      <router-link
         to="/"
         class="text-mygreen font-semibold py-2 px-4 rounded-md hover: focus:outline-none"
-        v-if="msg"
       >
         Login
-      </router-link> -->
+      </router-link>
     </form>
   </div>
 </template>

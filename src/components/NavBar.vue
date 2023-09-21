@@ -4,7 +4,7 @@
       class="w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between"
       aria-label="Global"
     >
-      <div class="flex hover:text-white sm:justify-start justify-center">
+      <div class="flex hover:text-green-400 sm:justify-start justify-center">
         <p class="flex-none text-2xl font-bold">Rentrip</p>
         <span class="material-symbols-rounded"> local_taxi </span>
       </div>
