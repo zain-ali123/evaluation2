@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 text-left">
       <div
         v-for="car in cars.value"
         :key="car.id"
@@ -10,18 +10,21 @@
         <p class="text-gray-600">{{ car.model }}</p>
         <p class="text-gray-600">{{ car.color }}</p>
         <p class="text-gray-600">{{ car.price }}</p>
-        <button
-          @click="openUpdateModal(car)"
-          class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
-        >
-          Update Car
-        </button>
-        <button
-          @click="deleteCar(car.id)"
-          class="bg-red-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-red-600"
-        >
-          Delete
-        </button>
+        <div class="flex justify-between">
+          <button
+            @click="openUpdateModal(car)"
+            class="text-blue-500 bg-white mt-2 rounded-md hover:text-blue-800 hover:px-4 hover:py-2 hover:bg-blue-100"
+          >
+            Update Car
+          </button>
+          <!-- <p class="px-4"></p> -->
+          <button
+            @click="deleteCar(car.id)"
+            class="text-red-500 bg-white mt-2 rounded-md hover:text-red-800 hover:px-4 hover:py-2 hover:bg-red-100"
+          >
+            Delete
+          </button>
+        </div>
       </div>
       <div
         v-if="isUpdateModalOpen"
@@ -75,14 +78,15 @@
                 required
               />
             </div>
-            <div class="mt-6">
+            <div class="mb-6">
               <button
                 @click="updateCar"
                 type="submit"
-                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                class="text-blue-500 bg-white rounded-md hover:text-blue-600"
               >
                 Update
               </button>
+              <p class="px-4"></p>
               <button
                 @click="closeUpdateModal"
                 class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 ml-2"
@@ -93,13 +97,6 @@
           </form>
         </div>
       </div>
-    </div>
-    <div class="py-5">
-      <router-link
-        to="/reservation"
-        class="bg-blue-500 text-white px-4 py-2 mt-2 rounded-md hover:bg-blue-600"
-        >View Reservations</router-link
-      >
     </div>
   </div>
 </template>

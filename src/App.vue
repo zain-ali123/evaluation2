@@ -17,6 +17,9 @@ import NavBar from "./components/NavBar.vue";
 nav {
   padding: 30px;
 }
+body {
+  background-color: #f5f5f5;
+}
 
 nav a {
   font-weight: bold;

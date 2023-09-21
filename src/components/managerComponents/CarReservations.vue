@@ -1,21 +1,41 @@
 <template>
-  <div>
-    <div v-for="item in reservations.value" :key="item._id">
-      <div>
-        <p>{{ item.carId.name }}</p>
-        <p>{{ item.carId.color }}</p>
-        <p>{{ item.carId.model }}</p>
-        <p>{{ item.days }}</p>
+  <div class="">
+    <div
+      class="w-full py-6 hidden sm:grid sm:grid-cols-4 border-2 font-extrabold bg-white"
+    >
+      <div class="col-span-1">NAME</div>
+      <div class="col-span-1">COLOR</div>
+      <div class="col-span-1">MODEL</div>
+      <div class="col-span-1">DAYS</div>
+      <!-- <div class="col-span-1">TOTAL</div> -->
+    </div>
+    <div class="border pt-3" v-for="item in reservations.value" :key="item._id">
+      <div class="grid grid-cols-4">
+        <p class="col-span-1 font-bold">{{ item.carId.name }}</p>
+        <p class="col-span-1">{{ item.carId.color }}</p>
+        <p class="col-span-1">{{ item.carId.model }}</p>
+        <p class="col-span-1">{{ item.days }}</p>
       </div>
-      <button @click="getUserDetails(item._id)">View user</button>
-      <div v-show="showUser[item._id]">
-        <div>
-          <p>{{ user?.name }}</p>
-          <p>{{ user?.email }}</p>
+      <div class="">
+        <div></div>
+        <button
+          class=""
+          v-if="!showUser[item._id]"
+          @click="showUserDetails(item._id)"
+        >
+          <div class="">User Details</div>
+          <span class="material-symbols-rounded">keyboard_arrow_down </span>
+        </button>
+        <button v-else @click="hideUserDetails(item._id)">
+          <span class="material-symbols-rounded"> keyboard_arrow_up </span>
+        </button>
+        <div v-show="showUser[item._id]">
+          <div>
+            <p>{{ user?.name }}</p>
+            <p>{{ user?.email }}</p>
+          </div>
         </div>
-        <button @click="closeUserDetails(item._id)">Close</button>
       </div>
-      <p class="py-6"></p>
     </div>
   </div>
 </template>
@@ -36,15 +56,14 @@ reservations.value = computed(
   () => store.getters["reservation/getReservations"]
 );
 
-const getUserDetails = async (reservationId) => {
+const showUserDetails = async (reservationId) => {
   await store.dispatch("reservation/fetchUserByReservationId", reservationId);
   user.value = store.getters["reservation/getUser"];
-  console.log("user>>>", user.value);
   // Set showUser for the clicked reservation to true
   showUser.value[reservationId] = true;
 };
 
-const closeUserDetails = (reservationId) => {
+const hideUserDetails = (reservationId) => {
   // Set showUser for the clicked reservation to false to hide the user details
   showUser.value[reservationId] = false;
 };
