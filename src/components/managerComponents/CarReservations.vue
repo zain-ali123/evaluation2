@@ -30,9 +30,9 @@
           <span class="material-symbols-rounded"> keyboard_arrow_up </span>
         </button>
         <div v-show="showUser[item._id]">
-          <div>
-            <p>{{ user?.name }}</p>
-            <p>{{ user?.email }}</p>
+          <div class="grid justify-center">
+            <p>NAME:{{ user?.name }}</p>
+            <p>EMAIL:{{ user?.email }}</p>
           </div>
         </div>
       </div>

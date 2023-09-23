@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -97,6 +97,11 @@ const registerUser = async () => {
     msgArray.value = store.state.responseMessage;
   }
 };
+
+const user = ref(null);
+// user.value = computed(() => store.getters["user/getUser"]);
+user.value = store.getters["user/getUser"];
+console.log(user.value);
 </script>
 
 <style scoped>

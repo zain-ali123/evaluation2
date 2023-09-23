@@ -3,14 +3,15 @@ export default {
    namespaced: true,
   state: {
     responseMessage: null,
-    user: null,
+    user: [],
     role: null,
     users:[]
   },
   mutations: {
     SET_USER(state, payload) {
-      console.log("payload user: ",payload)
+      // console.log("payload user MUTATION: ",payload)
       state.user = payload;
+      console.log("state User:>>>>>>>>>>>>>>>>>>>>",state.user)
     },
 SET_USERS(state, payload) {
       console.log("payload users: ", payload)
@@ -45,11 +46,12 @@ SET_USERS(state, payload) {
           return 0 
         }
         console.log("USER ROLE>>>>>>>>>>>>>>>>>>>", data.data.user.role)
-        this.state.user= data.data.user
+        // this.state.user= data.data.user
         this.state.role=data.data.user.role
         this.state.responseMessage = data.message
         this.state.userId = data.data.user._id
         this.state.token = data.data.token
+        commit("SET_USER",data.data.user)
 
         localStorage.setItem("token", data.data.token)
         localStorage.setItem("userId", data.data.user._id)
@@ -80,6 +82,10 @@ SET_USERS(state, payload) {
   getters: {
     getAllUsers(state) {
       return state.users
+    },
+    getUser(state) {
+      console.log(state.user)
+      return state.user
     }
   },
 };

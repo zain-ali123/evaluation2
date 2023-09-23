@@ -95,7 +95,7 @@ export default {
         }
         if (store.state.role === "manager") {
           console.log("manager block role :", store.state.role);
-          router.push("/manager/createUser");
+          router.push("/manager/reservations");
         }
       }
       msg.value = store.state.responseMessage;

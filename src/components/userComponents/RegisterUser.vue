@@ -5,7 +5,7 @@
       @submit.prevent="registerUser"
     >
       <h2 class="text-2xl mb-4">User Registration</h2>
-      <div class="mb-4">
+      <div class="mb-4 text-left">
         <label for="name" class="block font-semibold">Name</label>
         <input
           v-model="formData.name"

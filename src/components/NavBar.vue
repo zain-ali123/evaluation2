@@ -58,12 +58,16 @@
         >
         <button
           @click="logout"
-          v-if="isUserLoggedIn"
+          v-if="isUserLoggedIn && role"
           class="block px-4 py-2 hover:scale-110 text-black sm:font-bold"
         >
           Sign Out
         </button>
-        <router-link to="/account" class="text-mygreen" v-if="isUserLoggedIn">
+        <router-link
+          to="/profile"
+          class="text-mygreen"
+          v-if="isUserLoggedIn && role"
+        >
           Account
         </router-link>
       </div>
@@ -79,10 +83,15 @@ import { useStore } from "vuex";
 const store = useStore();
 const router = useRouter();
 const isUserLoggedIn = ref(false);
+const role = ref(null);
 isUserLoggedIn.value = computed(() =>
   localStorage.getItem("token") ? true : false
 );
-const role = localStorage.getItem("role");
+role.value = computed(() => {
+  localStorage.getItem("role");
+  console.log(role);
+});
+role.value = localStorage.getItem("role");
 
 const logout = () => {
   localStorage.removeItem("userId");
