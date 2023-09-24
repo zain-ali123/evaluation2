@@ -78,17 +78,18 @@ const filteredCars = computed(() => {
   const filter = selectedFilter.value;
   const search = searchQuery.value.toLowerCase();
   console.log(Array.isArray(cars.value));
-
-  return cars.value.filter((car) => {
-    if (filter == "model") {
-      // const str=car.toString
-      const carValue = car[filter].toString();
-      return carValue.includes(search);
-    } else {
-      const carValue = car[filter].toLowerCase();
-      return carValue.includes(search);
-    }
-  });
+  if (Array.isArray(cars.value)) {
+    return cars.value.filter((car) => {
+      if (filter == "model") {
+        // const str=car.toString
+        const carValue = car[filter].toString();
+        return carValue.includes(search);
+      } else {
+        const carValue = car[filter].toLowerCase();
+        return carValue.includes(search);
+      }
+    });
+  }
 });
 console.log(filteredCars.value);
 

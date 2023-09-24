@@ -97,7 +97,3 @@ const registerUser = async () => {
   }
 };
 </script>
-
-<style scoped>
-/* Add any component-specific styles here */
-</style>

@@ -59,12 +59,10 @@ reservations.value = computed(
 const showUserDetails = async (reservationId) => {
   await store.dispatch("reservation/fetchUserByReservationId", reservationId);
   user.value = store.getters["reservation/getUser"];
-  // Set showUser for the clicked reservation to true
   showUser.value[reservationId] = true;
 };
 
 const hideUserDetails = (reservationId) => {
-  // Set showUser for the clicked reservation to false to hide the user details
   showUser.value[reservationId] = false;
 };
 </script>

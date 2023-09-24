@@ -97,13 +97,4 @@ const registerUser = async () => {
     msgArray.value = store.state.responseMessage;
   }
 };
-
-const user = ref(null);
-// user.value = computed(() => store.getters["user/getUser"]);
-user.value = store.getters["user/getUser"];
-console.log(user.value);
 </script>
-
-<style scoped>
-/* Add your Tailwind CSS classes for styling here */
-</style>

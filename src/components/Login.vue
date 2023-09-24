@@ -110,39 +110,3 @@ export default {
   },
 };
 </script>
-
-<!-- <script>
-import { mapActions } from "vuex";
-import store from "@/store";
-import router from "@/router";
-export default {
-  name: "LoginUserView",
-  data() {
-    return {
-      formData: {
-        email: "",
-        password: "",
-      },
-      msg: null,
-    };
-  },
-  methods: {
-    ...mapActions({ auth: "authenticateUser" }),
-    async authenticateUser() {
-      await this.auth(this.formData);
-      if (store.state.responseMessage == "User found!!!") {
-        store.state.isAuthenticated = true;
-        if (store.state.userRole == "user") {
-          router.push("/allMovies");
-        }
-        if (store.state.userRole == "admin") {
-          router.push("/admin");
-        }
-        console.log("in if blovk (LOGIN)");
-      }
-      this.msg = store.state.responseMessage;
-      console.log("Authentication data:", this.formData);
-    },
-  },
-};
-</script> -->

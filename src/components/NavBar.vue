@@ -102,37 +102,3 @@ const logout = () => {
   router.push("/");
 };
 </script>
-
-<!-- <script>
-import { computed, ref } from "vue";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-
-export default {
-  name: "NavBar",
-  setup() {
-    const store = useStore();
-    const router = useRouter();
-    const isUserLoggedIn = ref(false);
-    isUserLoggedIn.value = computed(() =>
-      localStorage.getItem("token") ? true : false
-    );
-    const role = localStorage.getItem("role");
-
-    const logout = () => {
-      localStorage.removeItem("userId");
-      localStorage.removeItem("token");
-
-      localStorage.removeItem("role");
-      isUserLoggedIn.value = false;
-      router.push("/");
-    };
-
-    return {
-      isUserLoggedIn,
-      role,
-      logout,
-    };
-  },
-};
-</script> -->
