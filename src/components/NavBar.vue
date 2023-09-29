@@ -28,13 +28,13 @@
         >
         <router-link
           class="sm:font-medium hover:text-gray-400 hover:text-mygreen"
-          to="/reservation"
+          to="/user/reservation"
           v-if="role == 'user'"
           >Reservations</router-link
         >
         <router-link
           class="sm:font-medium hover:text-gray-400 hover:text-mygreen"
-          to="/carsList"
+          to="/user/carsList"
           v-if="role == 'user'"
           >Cars</router-link
         >
@@ -58,15 +58,15 @@
         >
         <button
           @click="logout"
-          v-if="isUserLoggedIn && role"
+          v-if="(isUserLoggedIn && role == 'manager') || role == 'user'"
           class="block px-4 py-2 hover:scale-110 text-black sm:font-bold"
         >
           Sign Out
         </button>
         <router-link
-          to="/profile"
+          :to="accountRoute"
           class="text-mygreen"
-          v-if="isUserLoggedIn && role"
+          v-if="isUserLoggedIn && (role == 'manager' || role == 'user')"
         >
           Account
         </router-link>
@@ -76,29 +76,34 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 const store = useStore();
 const router = useRouter();
 const isUserLoggedIn = ref(false);
-const role = ref(null);
-isUserLoggedIn.value = computed(() =>
-  localStorage.getItem("token") ? true : false
-);
-role.value = computed(() => {
-  localStorage.getItem("role");
-  console.log(role);
-});
-role.value = localStorage.getItem("role");
+
+isUserLoggedIn.value = localStorage.getItem("isAuthenticated");
+const role = computed(() => localStorage.getItem("role"));
+console.log("nav", isUserLoggedIn.value);
 
 const logout = () => {
   localStorage.removeItem("userId");
   localStorage.removeItem("token");
-
   localStorage.removeItem("role");
+  localStorage.removeItem("isAuthenticated");
   isUserLoggedIn.value = false;
   router.push("/");
 };
+
+const accountRoute = computed(() => {
+  if (role.value === "manager") {
+    return "/manager/profile";
+  } else if (role.value === "user") {
+    return "/user/profile";
+  } else {
+    return "/";
+  }
+});
 </script>

@@ -91,7 +91,7 @@ export default {
         console.log(store.state.role);
         if (store.state.role === "user") {
           console.log("user block role :", store.state.role);
-          router.push("/carsList");
+          router.push("user/carsList");
         }
         if (store.state.role === "manager") {
           console.log("manager block role :", store.state.role);

@@ -1,10 +1,9 @@
 <template>
-  <NavBar />
-  <router-view />
+  <div>
+    <router-view />
+  </div>
 </template>
-<script setup>
-import NavBar from "./components/NavBar.vue";
-</script>
+<script setup></script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

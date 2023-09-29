@@ -55,7 +55,8 @@ SET_USERS(state, payload) {
 
         localStorage.setItem("token", data.data.token)
         localStorage.setItem("userId", data.data.user._id)
-        localStorage.setItem("role",data.data.user.role)
+        localStorage.setItem("role", data.data.user.role)
+        localStorage.setItem("isAuthenticated",true)
         
         console.log("token->>>>>>>>>>>>>>>>",this.state.token)
         axios.defaults.headers.common['Authorization'] = this.state.token;

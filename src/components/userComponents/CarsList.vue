@@ -60,26 +60,26 @@
 
 <script setup>
 import { useStore } from "vuex";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, toRef } from "vue";
 const store = useStore();
 const cars = ref([]);
 const searchQuery = ref("");
 const selectedFilter = ref("name");
 
-cars.value = computed(() => {
-  cars.value = store.getters["cars/getCars"];
-});
-console.log(cars.value);
 onMounted(async () => {
   await store.dispatch("cars/fetchCars");
 });
 
+cars.value = computed(() => store.getters["cars/getCars"]);
+// const cars = computed(() => store.getters["cars/getCars"]);
+console.log(cars.value);
+
 const filteredCars = computed(() => {
   const filter = selectedFilter.value;
   const search = searchQuery.value.toLowerCase();
-  console.log(Array.isArray(cars.value));
-  if (Array.isArray(cars.value)) {
-    return cars.value.filter((car) => {
+  console.log(Array.isArray(cars.value.value));
+  if (Array.isArray(cars.value.value)) {
+    return cars.value.value.filter((car) => {
       if (filter == "model") {
         // const str=car.toString
         const carValue = car[filter].toString();
@@ -110,10 +110,3 @@ const reserveCar = async (car) => {
   }
 };
 </script>
-
-<!-- const filteredData = computed(() => { console.log(cars.value.value); const query
-= searchQuery.value.toLowerCase().trim(); console.log(query); if (!query) return
-cars.value; return cars.value.value.filter( (item) =>
-item.name.toLowerCase().includes(query) ||
-item.color.toLowerCase().includes(query) // || // item.model.includes(query) ||
-); }); -->

@@ -8,7 +8,6 @@ export default {
     mutations: {
       SET_CARS(state, payload) {
         state.cars = payload
-        
         }
     },
     actions: {
@@ -87,7 +86,6 @@ export default {
     },
     getters: {
       getCars(state) {
-       
         return state.cars
 
       }  
